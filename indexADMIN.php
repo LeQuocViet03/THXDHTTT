@@ -15,6 +15,23 @@ $username = $_SESSION['username'];
     <title>Hệ thống quản lý phòng thực hành</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
+    <script>
+        function loadContent(page) {
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", page + ".php", true);
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    document.getElementById('content-right').innerHTML = this.responseText;
+                } else {
+                    console.error("Error loading content: ", this.status);
+                }
+            };
+            xhr.onerror = function () {
+                console.error("Request error");
+            };
+            xhr.send();
+        }
+    </script>
 </head>
 <body>
     <header class="header">
@@ -30,7 +47,7 @@ $username = $_SESSION['username'];
             <li><a href="#">Thông tin giảng viên</a></li>
             <li><a href="#">Thông tin phòng học</a></li>
             <li><a href="#">Thời khóa biểu</a></li>
-            <li><a href="#">Gửi thông báo</a></li>
+            <li><a href="#" onclick="loadContent('thongbaoAD')">Gửi thông báo</a></li>
             <li class="user-info">
                 <a href="logout.php"><?php echo $username;?>
             </li>
