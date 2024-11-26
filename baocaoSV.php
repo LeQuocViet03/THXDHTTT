@@ -47,8 +47,8 @@
     </style>
 </head>
 <body>
+    <h2>Gửi Báo Cáo</h2>
     <div class="form-container">
-        <h2>Gửi Báo Cáo</h2>
         <?php if (isset($message)): ?>
             <div class="message"><?php echo htmlspecialchars($message); ?></div>
         <?php endif; ?>

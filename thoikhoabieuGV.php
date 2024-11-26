@@ -12,8 +12,6 @@ if (!$conn) {
     echo "Kết nối thất bại!";
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_SESSION['username'];
     $sql = "SELECT 
                 cahoc.ngayHoc AS thu,
                 cahoc.caHoc AS ca,
@@ -34,12 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 hocphan
             ON
                 phancong.maLHP = hocphan.maLHP
-            JOIN
-                sinhvien
-            ON
-                sinhvien.khoa = hocphan.khoa
-            AND
-                sinhvien.maSV = $username
             ORDER BY 
                 cahoc.caHoc, cahoc.ngayHoc";
 
@@ -59,7 +51,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $danhSachThu = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
     $danhSachCa = [1, 2, 3, 4];
-}
 ?>
 
 <!DOCTYPE html>
