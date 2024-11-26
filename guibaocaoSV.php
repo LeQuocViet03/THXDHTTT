@@ -13,6 +13,7 @@ if (!$conn) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $maPhong = trim($_POST['maPhong']);
     $noiDung = trim($_POST['noiDung']);
+    date_default_timezone_set('Asia/Ho_Chi_Minh');
     $thoiGian = date('Y-m-d H:i:s');
 
     if (!empty($maPhong) && !empty($noiDung)) {

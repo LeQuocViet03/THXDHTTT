@@ -14,7 +14,9 @@ if (!$conn) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $taiKhoan = $_SESSION['username'];
     $noiDung = trim($_POST['noiDung']);
+    date_default_timezone_set('Asia/Ho_Chi_Minh');
     $thoiGian = date('Y-m-d H:i:s');
+
 
     $sql = "INSERT INTO lsthongbao (taiKhoan, noiDung, thoiGian) VALUES (?, ?, ?)";
     $stmt = $conn->prepare($sql);
