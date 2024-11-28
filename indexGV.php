@@ -45,8 +45,7 @@ $username = $_SESSION['username'];
         <ul class="nav-menu">
             <li><a href="#" onclick="loadContent('thongtinGV')">Thông tin giảng viên</a></li>
             <li><a href="#" onclick="loadContent('thoikhoabieuGV')">Thời khóa biểu</a></li>
-            <li><a href="#">Đặt lịch học</a></li>
-            <li><a href="#">Đổi lịch học</a></li>
+            <li><a href="#" onclick="loadContent('lichhoc')">Lịch học</a></li>
             <li><a href="#" onclick="loadContent('baocaoGV')">Gửi báo cáo</a></li>
             <li class="user-info">
                 <a href="logout.php"><?php echo $username;?>

@@ -12,6 +12,8 @@ if (!$conn) {
     echo "Kết nối thất bại!";
 }
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_SESSION['username'];
     $sql = "SELECT 
                 cahoc.ngayHoc AS thu,
                 cahoc.caHoc AS ca,
@@ -32,6 +34,8 @@ if (!$conn) {
                 hocphan
             ON
                 phancong.maLHP = hocphan.maLHP
+            AND
+                giangvien.maGV = $username
             ORDER BY 
                 cahoc.caHoc, cahoc.ngayHoc";
 
@@ -51,6 +55,7 @@ if (!$conn) {
 
     $danhSachThu = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
     $danhSachCa = [1, 2, 3, 4];
+}
 ?>
 
 <!DOCTYPE html>
@@ -58,11 +63,11 @@ if (!$conn) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thời Khóa Biểu</title>
+    <title>Thời Khóa Biểu Giảng Viên</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            line-height: 1.6;
         }
         table {
             width: 100%;
@@ -85,7 +90,7 @@ if (!$conn) {
     </style>
 </head>
 <body>
-    <h1>Thời Khóa Biểu</h1>
+    <h1>Thời Khóa Biểu Giảng Viên</h1>
     <table>
         <thead>
             <tr>

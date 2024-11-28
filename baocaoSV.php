@@ -37,21 +37,11 @@
         button:hover {
             background: #0056b3;
         }
-        .message {
-            color: green;
-            font-weight: bold;
-        }
-        .error {
-            color: red;
-        }
     </style>
 </head>
 <body>
     <h2>Gửi Báo Cáo</h2>
     <div class="form-container">
-        <?php if (isset($message)): ?>
-            <div class="message"><?php echo htmlspecialchars($message); ?></div>
-        <?php endif; ?>
         <form method="POST" action="guibaocaoSV.php">
             <div class="form-group">
                 <label for="maPhong">Mã phòng:</label>

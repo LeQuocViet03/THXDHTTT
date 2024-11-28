@@ -10,7 +10,9 @@ if (!$conn) {
     echo "Kết nối thất bại!";
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+$message = "";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $maPhong = trim($_POST['maPhong']);
     $noiDung = trim($_POST['noiDung']);
     date_default_timezone_set('Asia/Ho_Chi_Minh');
@@ -23,8 +25,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($stmt->execute()) {
             $message = "Báo cáo đã được gửi thành công!";
             header("Location: indexSV.php");
+        }else {
+            $message = "Lỗi ghi dữ liệu vào cơ sở dữ liệu: " . $stmt->error;
         }
+
         $stmt->close();
+    }else {
+        $message = "Vui lòng điền đầy đủ thông tin.";
     }
 }
 ?>

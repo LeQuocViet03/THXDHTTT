@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            line-height: 1.6;
         }
         table {
             width: 100%;
