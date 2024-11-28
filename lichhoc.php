@@ -136,7 +136,12 @@ if (!$conn) {
             display: block;
             margin-bottom: 5px;
         }
-        .form-group input,
+        .form-group select{
+            font-size: 1.2rem;
+            padding: 0.75rem 1.25rem;
+            height: 3rem;
+            width: 300px;
+        }
         .form-group textarea {
             width: 100%;
             padding: 8px;
@@ -167,41 +172,82 @@ if (!$conn) {
     <div class="headerTKB">
         <h1>Thời Khóa Biểu Tổng</h1>
         <div class="buttons">
-            <button onclick="datlich()">Đặt lịch học</button>
-            <button onclick="alert('Đổi lịch học: Chức năng đang được phát triển!')">Đổi lịch học</button>
+            <button onclick="doilich()">Đổi lịch học</button>
             <button onclick="location.reload()">Làm Mới</button>
         </div>
     </div>
 
-    <div class="modal" id="datlich">
+    <div class="modal" id="doilich">
         <div class="modal-content">
-            <h2>Gửi Báo Cáo</h2>
+            <h2>Đổi Lịch Học</h2>
             <div class="form-container">
-                <form>
+                <form action="doilichhoc.php" method="POST">
                     <div class="form-group">
-                        <label for="maPhong">Mã phòng:</label>
-                        <input type="text" id="maPhong" name="maPhong" required>
+                        <label for="maPhong">Tên học phần:</label>
+                        <select id="tenHP" name="tenHP">
+                            <?php
+                                $sql = "SELECT tenHP FROM hocphan";
+                                $result = $conn->query($sql);
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<option value='" . $row['tenHP'] . "'>" . $row['tenHP'] . "</option>";
+                                }
+                            ?>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="noiDung">Nội dung báo cáo:</label>
-                        <textarea id="noiDung" name="noiDung" rows="5" required></textarea>
+                        <label for="maPhong">Mã phòng cũ:</label>
+                        <select id="maPhong" name="maPhong">
+                            <?php
+                                $sql = "SELECT maPhong FROM phonghoc";
+                                $result = $conn->query($sql);
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<option value='" . $row['maPhong'] . "'>" . $row['maPhong'] . "</option>";
+                                }
+                            ?>
+                        </select>
                     </div>
-                    <button type="submit">Gửi Báo Cáo</button>
-                    <button type="button" onclick="dong1()">Đóng</button>
+                    <div class="form-group">
+                        <label for="maPhong">Mã phòng mới:</label>
+                        <select id="maPhong" name="maPhong">
+                            <?php
+                                $sql = "SELECT maPhong FROM phonghoc";
+                                $result = $conn->query($sql);
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<option value='" . $row['maPhong'] . "'>" . $row['maPhong'] . "</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="maPhong">Ca học cũ:</label>
+                        <select id="maCH" name="maCH">
+                            <?php
+                                $sql = "SELECT maCH FROM cahoc";
+                                $result = $conn->query($sql);
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<option value='" . $row['maCH'] . "'>" . $row['maCH'] . "</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="maPhong">Ca học mới:</label>
+                        <select id="maCH" name="maCH">
+                            <?php
+                                $sql = "SELECT maCH FROM cahoc";
+                                $result = $conn->query($sql);
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<option value='" . $row['maCH'] . "'>" . $row['maCH'] . "</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
+                    <button type="submit">Đổi lịch học</button>
+                    <button type="button" onclick="dong()">Đóng</button>
                 </form>
             </div>
         </div>
     </div>
-
-    <script>
-        function datlich() {
-            document.getElementById("datlich").style.display = "flex";
-        }
-
-        function dong1() {
-            document.getElementById("datlich").style.display = "none";
-        }
-    </script>
 
     <table>
         <thead>
@@ -234,6 +280,5 @@ if (!$conn) {
             <?php endforeach; ?>
         </tbody>
     </table>
-
 </body>
 </html>

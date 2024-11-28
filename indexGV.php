@@ -31,6 +31,14 @@ $username = $_SESSION['username'];
             };
             xhr.send();
         }
+
+        function doilich() {
+            document.getElementById("doilich").style.display = "flex";
+        }
+
+        function dong() {
+            document.getElementById("doilich").style.display = "none";
+        }
     </script>
 </head>
 <body>

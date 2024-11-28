@@ -1,3 +1,18 @@
+<?php
+session_start();
+
+$sname = "localhost";
+$uname = "root";
+$password = "";
+$db_name = "QLPHONGTHUCHANH";
+
+$conn = mysqli_connect($sname, $uname, $password, $db_name);
+
+if (!$conn) {
+    echo "Kết nối thất bại!";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -26,6 +41,12 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+        select{
+            font-size: 1.2rem;
+            padding: 0.75rem 1.25rem;
+            height: 3rem;
+            width: 300px;
+        }
         button {
             padding: 10px 15px;
             background: #007bff;
@@ -45,7 +66,15 @@
         <form method="POST" action="guibaocaoSV.php">
             <div class="form-group">
                 <label for="maPhong">Mã phòng:</label>
-                <input type="text" id="maPhong" name="maPhong" required>
+                <select id="maPhong" name="maPhong">
+                    <?php
+                        $sql = "SELECT maPhong FROM phonghoc";
+                        $result = $conn->query($sql);
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<option value='" . $row['maPhong'] . "'>" . $row['maPhong'] . "</option>";
+                        }
+                    ?>
+                </select>
             </div>
             <div class="form-group">
                 <label for="noiDung">Nội dung báo cáo:</label>
