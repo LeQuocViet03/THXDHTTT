@@ -43,9 +43,9 @@ $username = $_SESSION['username'];
 
     <nav class="nav-bar">
         <ul class="nav-menu">
-            <li><a href="#">Thông tin sinh viên</a></li>
-            <li><a href="#">Thông tin giảng viên</a></li>
-            <li><a href="#">Thông tin phòng học</a></li>
+            <li><a href="#" onclick="loadContent('quanlySV')">Thông tin sinh viên</a></li>
+            <li><a href="#" onclick="loadContent('quanlyGV')">Thông tin giảng viên</a></li>
+            <li><a href="#" onclick="loadContent('quanlyPH')">Thông tin phòng học</a></li>
             <li><a href="#" onclick="loadContent('thoikhoabieuAD')">Thời khóa biểu</a></li>
             <li><a href="#" onclick="loadContent('thongbaoAD')">Gửi thông báo</a></li>
             <li class="user-info">
