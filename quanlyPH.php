@@ -78,26 +78,26 @@
             background-color: #f1f1f1;
         }
 
-        .action-buttons {
+        .edit-btn {
             display: flex;
             justify-content: center;
-            gap: 10px;
-        }
-
-        .action-buttons button {
             padding: 8px 15px;
             font-size: 14px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-        }
-
-        .edit-btn {
             background-color: #ffc107;
             color: black;
         }
 
         .delete-btn {
+            display: flex;
+            justify-content: center;
+            padding: 8px 15px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
             background-color: #dc3545;
             color: white;
         }
@@ -129,7 +129,8 @@
             <th>Số Lượng Máy Chiếu</th>
             <th>Số Lượng Điều Hòa</th>
             <th>Số Lượng Quạt</th>
-            <th>Hành Động</th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody id="teacherTable">
@@ -144,7 +145,7 @@
                 die("Kết nối thất bại: " . $conn->connect_error);
             }
 
-            $sql = "SELECT * FROM phonghoc";
+            $sql = "SELECT * FROM phonghoc WHERE Rand() LIMIT 5";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
@@ -157,7 +158,9 @@
                     echo "<td></td>";
                     echo "<td></td>";
                     echo "<td class='action-buttons'>
-                            <button class='edit-btn' onclick='chinhSua(" . $row["maPhong"] . ")'>Sửa</button>
+                            <button class='edit-btn' onclick='chinhSuaPhong(" . $row["maPhong"] . ")'>Sửa</button>
+                        </td>";
+                    echo "<td>
                             <button class='delete-btn' onclick='xoaPhong(" . $row["maPhong"] . ")'>Xóa</button>
                         </td>";
                     echo "</tr>";

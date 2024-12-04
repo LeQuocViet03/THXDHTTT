@@ -12,6 +12,8 @@ if (!$conn) {
     echo "Kết nối thất bại!";
 }
 
+$phongHocFilter = isset($_GET['phongHoc']) ? $_GET['phongHoc'] : '';
+
     $sql = "SELECT 
                 cahoc.ngayHoc AS thu,
                 cahoc.caHoc AS ca,
@@ -31,9 +33,13 @@ if (!$conn) {
             JOIN
                 hocphan
             ON
-                phancong.maLHP = hocphan.maLHP
-            ORDER BY 
-                cahoc.caHoc, cahoc.ngayHoc";
+                phancong.maLHP = hocphan.maLHP";
+
+    if (!empty($phongHocFilter)) {
+        $sql .= " WHERE phancong.maPhong = '$phongHocFilter'";
+    }
+
+    $sql .= " ORDER BY cahoc.caHoc, cahoc.ngayHoc";
 
     $stmt = $conn->prepare($sql);
     $stmt->execute();
@@ -176,6 +182,23 @@ if (!$conn) {
             <button onclick="location.reload()">Làm Mới</button>
         </div>
     </div>
+
+    <form method = "GET" action="#">
+    <div class="filter-container">
+        <label for="phongHoc">Lọc theo phòng học:</label>
+        <select name="phongHoc" id="phongHoc">
+            <option value="">Tất cả</option>
+            <?php
+            $phongQuery = "SELECT DISTINCT maPhong FROM phancong";
+            $phongResult = $conn->query($phongQuery);
+            while ($phongRow = $phongResult->fetch_assoc()) {
+                echo "<option value='" . $phongRow['maPhong'] . "'>" . $phongRow['maPhong'] . "</option>";
+            }
+            ?>
+        </select>
+        <button type="submit">Lọc</button>
+    </div>
+    </form>
 
     <div class="modal" id="doilich">
         <div class="modal-content">
