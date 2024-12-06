@@ -59,7 +59,7 @@ $username = $_SESSION['username'];
             <div class="sidebar-menu">
                 <h3>Thống kê</h3>
                 <ul>
-                    <li><a href="#">Lịch sử sữa chữa</a></li>
+                    <li><a href="test2.php">Lịch sử sữa chữa</a></li>
                     <li><a href="#">Lịch sử báo cáo</a></li>
                     <li><a href="#">Lịch sử thay đổi phòng học</a></li>
                 </ul>
