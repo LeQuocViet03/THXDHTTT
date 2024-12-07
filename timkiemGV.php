@@ -32,7 +32,6 @@
                 echo "<td></td>";
                 echo "<td>" . $row["email"] . "</td>";
                 echo "<td></td>";
-                echo "<td></td>";
                 echo "<td>
                         <button class='edit-btn' onclick='chinhSua(" . $row["maGV"] . ")'>Sửa</button>
                     </td>";

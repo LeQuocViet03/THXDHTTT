@@ -58,11 +58,11 @@ if (!$conn) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thời Khóa Biểu</title>
+    <title>Thời Khóa Biểu Tổng</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            line-height: 1.6;
         }
         table {
             width: 100%;
@@ -82,11 +82,210 @@ if (!$conn) {
         td {
             height: 70px;
         }
+        .headerTKB {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .headerTKB h1 {
+            margin: 0;
+        }
+        .headerTKB .buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .buttons button {
+            padding: 10px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+        }
+        .buttons button:hover {
+            background-color: #0056b3;
+        }
+        .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            width: 400px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .form-container {
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group select{
+            font-size: 1.2rem;
+            padding: 0.75rem 1.25rem;
+            height: 3rem;
+            width: 300px;
+        }
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-group textarea {
+            resize: none;
+        }
+        button[type="submit"], button[type="button"] {
+            margin-top: 10px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button[type="submit"] {
+            background-color: #007bff;
+            color: white;
+        }
+        button[type="button"] {
+            background-color: #f44336;
+            color: white;
+        }
+        #locButton {
+            margin-left: 10px;
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #locButton:hover {
+            background-color: #0056b3;
+        }
+        select{
+            font-size: 1.0rem;
+            padding: 0.75rem 1.25rem;
+            height: 2.75rem;
+            width: 300px;
+        }
     </style>
 </head>
+
 <body>
-    <h1>Thời Khóa Biểu</h1>
-    <table>
+    <div class="headerTKB">
+        <h1>Thời Khóa Biểu Tổng</h1>
+        <div class="buttons">
+            <button onclick="doilich()">Đổi lịch học</button>
+            <button onclick="location.reload()">Làm Mới</button>
+        </div>
+    </div>
+
+    <label for="phongHoc">Lọc theo phòng học:</label>
+    <select name="phongHoc" id="phongHoc">
+        <option value="">Tất cả</option>
+        <?php
+        $phongQuery = "SELECT DISTINCT maPhong FROM phancong";
+        $phongResult = $conn->query($phongQuery);
+        while ($phongRow = $phongResult->fetch_assoc()) {
+            echo "<option value='" . $phongRow['maPhong'] . "'>" . $phongRow['maPhong'] . "</option>";
+        }
+        ?>
+    </select>
+    <button id="locButton" onclick="loc()">Lọc</button>
+
+    <div class="modal" id="doilich">
+        <div class="modal-content">
+            <h2>Đổi Lịch Học</h2>
+            <div class="form-container">
+                <form action="doilichhoc.php" method="POST">
+                    <div class="form-group">
+                        <label for="maPhong">Tên học phần:</label>
+                        <select id="tenHP" name="tenHP">
+                            <?php
+                                $sql = "SELECT tenHP FROM hocphan";
+                                $result = $conn->query($sql);
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<option value='" . $row['tenHP'] . "'>" . $row['tenHP'] . "</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="maPhong">Mã phòng cũ:</label>
+                        <select id="maPhongCu" name="maPhongCu">
+                            <?php
+                                $sql = "SELECT maPhong FROM phonghoc";
+                                $result = $conn->query($sql);
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<option value='" . $row['maPhong'] . "'>" . $row['maPhong'] . "</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="maPhong">Mã phòng mới:</label>
+                        <select id="maPhongMoi" name="maPhongMoi">
+                            <?php
+                                $sql = "SELECT maPhong FROM phonghoc";
+                                $result = $conn->query($sql);
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<option value='" . $row['maPhong'] . "'>" . $row['maPhong'] . "</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="maPhong">Ca học cũ: <br>
+                            <i>(VD: t2c1 = thứ 2 ca 1)</i>
+                        </label>
+                        <select id="maCaCu" name="maCaCu">
+                            <?php
+                                $sql = "SELECT maCH FROM cahoc";
+                                $result = $conn->query($sql);
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<option value='" . $row['maCH'] . "'>" . $row['maCH'] . "</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="maPhong">Ca học mới:<br>
+                            <i>(VD: t2c1 = thứ 2 ca 1)</i>
+                        </label>
+                        <select id="maCaMoi" name="maCaMoi">
+                            <?php
+                                $sql = "SELECT maCH FROM cahoc";
+                                $result = $conn->query($sql);
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<option value='" . $row['maCH'] . "'>" . $row['maCH'] . "</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
+                    <button type="submit">Đổi lịch học</button>
+                    <button type="button" onclick="dong()">Đóng</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <table >
         <thead>
             <tr>
                 <th>Ca</th>
@@ -95,7 +294,7 @@ if (!$conn) {
                 <?php endforeach; ?>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="TableTKB">
             <?php foreach ($danhSachCa as $ca): ?>
                 <tr>
                     <td><?php echo "Ca $ca"; ?></td>
@@ -107,8 +306,9 @@ if (!$conn) {
                                 $string = htmlspecialchars($thoiKhoaBieu[$ca][$thu]);
                                 $tt = explode("-",$string);
                                 echo $tt[0]."</div><div>".$tt[1]."</div><div>".$tt[2];
+                            }else {
+                                echo "Trống";
                             }
-                            else echo "Trống";
                             ?>
                             </div>
                         </td>

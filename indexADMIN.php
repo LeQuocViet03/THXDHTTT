@@ -18,7 +18,7 @@ $username = $_SESSION['username'];
     <script>
         function loadContent(page) {
             const xhr = new XMLHttpRequest();
-            xhr.open("POST", page + ".php", true);
+            xhr.open("GET", page + ".php", true);
             xhr.onload = function () {
                 if (this.status === 200) {
                     document.getElementById('content-right').innerHTML = this.responseText;
@@ -111,6 +111,13 @@ $username = $_SESSION['username'];
             };
             xhr.send();
         }
+        function doilich() {
+            document.getElementById("doilich").style.display = "flex";
+        }
+
+        function dong() {
+            document.getElementById("doilich").style.display = "none";
+        }
     </script>
 </head>
 <body>
@@ -126,7 +133,7 @@ $username = $_SESSION['username'];
             <li><a href="#" onclick="loadContent('quanlySV')">Thông tin sinh viên</a></li>
             <li><a href="#" onclick="loadContent('quanlyGV')">Thông tin giảng viên</a></li>
             <li><a href="#" onclick="loadContent('quanlyPH')">Thông tin phòng học</a></li>
-            <li><a href="#" onclick="loadContent('lichhoc')">Thời khóa biểu</a></li>
+            <li><a href="#" onclick="loadContent('thoiKhoabieuAD')">Thời khóa biểu</a></li>
             <li><a href="#" onclick="loadContent('thongbaoAD')">Gửi thông báo</a></li>
             <li class="user-info">
                 <a href="logout.php"><?php echo $username;?>
