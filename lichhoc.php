@@ -12,8 +12,6 @@ if (!$conn) {
     echo "Kết nối thất bại!";
 }
 
-$phongHocFilter = isset($_GET['phongHoc']) ? $conn->real_escape_string($_GET['phongHoc']) : '';
-
     $sql = "SELECT 
                 cahoc.ngayHoc AS thu,
                 cahoc.caHoc AS ca,
@@ -196,20 +194,18 @@ $phongHocFilter = isset($_GET['phongHoc']) ? $conn->real_escape_string($_GET['ph
         </div>
     </div>
 
-    <form method="GET" action="locTKB.php">
-        <label for="phongHoc">Lọc theo phòng học:</label>
-        <select name="phongHoc" id="phongHoc">
-            <option value="">Tất cả</option>
-            <?php
-            $phongQuery = "SELECT DISTINCT maPhong FROM phancong";
-            $phongResult = $conn->query($phongQuery);
-            while ($phongRow = $phongResult->fetch_assoc()) {
-                echo "<option value='" . $phongRow['maPhong'] . "'>" . $phongRow['maPhong'] . "</option>";
-            }
-            ?>
-        </select>
-        <button id="locButton">Lọc</button>
-    </form>
+    <label for="phongHoc">Lọc theo phòng học:</label>
+    <select name="phongHoc" id="phongHoc">
+        <option value="">Tất cả</option>
+        <?php
+        $phongQuery = "SELECT DISTINCT maPhong FROM phancong";
+        $phongResult = $conn->query($phongQuery);
+        while ($phongRow = $phongResult->fetch_assoc()) {
+            echo "<option value='" . $phongRow['maPhong'] . "'>" . $phongRow['maPhong'] . "</option>";
+        }
+        ?>
+    </select>
+    <button id="locButton" onclick="loc()">Lọc</button>
 
     <div class="modal" id="doilich">
         <div class="modal-content">
@@ -253,7 +249,9 @@ $phongHocFilter = isset($_GET['phongHoc']) ? $conn->real_escape_string($_GET['ph
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="maPhong">Ca học cũ:</label>
+                        <label for="maPhong">Ca học cũ: <br>
+                            <i>(VD: t2c1 = thứ 2 ca 1)</i>
+                        </label>
                         <select id="maCaCu" name="maCaCu">
                             <?php
                                 $sql = "SELECT maCH FROM cahoc";
@@ -265,7 +263,9 @@ $phongHocFilter = isset($_GET['phongHoc']) ? $conn->real_escape_string($_GET['ph
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="maPhong">Ca học mới:</label>
+                        <label for="maPhong">Ca học mới:<br>
+                            <i>(VD: t2c1 = thứ 2 ca 1)</i>
+                        </label>
                         <select id="maCaMoi" name="maCaMoi">
                             <?php
                                 $sql = "SELECT maCH FROM cahoc";
@@ -283,7 +283,7 @@ $phongHocFilter = isset($_GET['phongHoc']) ? $conn->real_escape_string($_GET['ph
         </div>
     </div>
 
-    <table>
+    <table >
         <thead>
             <tr>
                 <th>Ca</th>
@@ -292,7 +292,7 @@ $phongHocFilter = isset($_GET['phongHoc']) ? $conn->real_escape_string($_GET['ph
                 <?php endforeach; ?>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="TableTKB">
             <?php foreach ($danhSachCa as $ca): ?>
                 <tr>
                     <td><?php echo "Ca $ca"; ?></td>

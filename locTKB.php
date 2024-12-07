@@ -12,51 +12,46 @@ if (!$conn) {
     echo "Kết nối thất bại!";
 }
 
-$phongHocFilter = isset($_GET['phongHoc']) ? $_GET['phongHoc'] : '';
+if ($_SERVER["REQUEST_METHOD"] === "GET") {
+    $phongHocFilter = isset($_GET['keyword']) ? $_GET['keyword'] : '';
 
-    $sql = "SELECT 
-                cahoc.ngayHoc AS thu,
-                cahoc.caHoc AS ca,
-                phancong.maPhong AS phong,
-                giangvien.hoTen AS tenGV,
-                hocphan.tenHP AS tenHP
-            FROM 
-                phancong
-            JOIN 
-                cahoc 
-            ON 
-                phancong.maCH = cahoc.maCH
-            JOIN 
-                giangvien 
-            ON 
-                phancong.maGV = giangvien.maGV
-            JOIN
-                hocphan
-            ON
-                phancong.maLHP = hocphan.maLHP";
+        $sql = "SELECT 
+                    cahoc.ngayHoc AS thu,
+                    cahoc.caHoc AS ca,
+                    phancong.maPhong AS phong,
+                    giangvien.hoTen AS tenGV,
+                    hocphan.tenHP AS tenHP
+                FROM 
+                    phancong
+                JOIN 
+                    cahoc ON phancong.maCH = cahoc.maCH
+                JOIN 
+                    giangvien ON phancong.maGV = giangvien.maGV
+                JOIN
+                    hocphan ON phancong.maLHP = hocphan.maLHP
+                WHERE phancong.maPhong = ?";
 
-    if (!empty($phongHocFilter)) {
-        $sql .= " WHERE phancong.maPhong = '$phongHocFilter'";
-    }
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $phongHocFilter);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-    $sql .= " ORDER BY cahoc.caHoc, cahoc.ngayHoc";
+        $danhSachThu = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
+        $danhSachCa = [1, 2, 3, 4];
+        $thoiKhoaBieu = [];
 
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    $thoiKhoaBieu = [];
-    while ($row = $result->fetch_assoc()) {
-        $thu = $row['thu'];
-        $ca = $row['ca'];
-        $phong = $row['phong'];
-        $tenGV = $row['tenGV'];
-        $tenHP = $row['tenHP'];
-        $thoiKhoaBieu[$ca][$thu] = "Môn:$tenHP-Phòng:$phong-GV:$tenGV";
-    }
-
-    $danhSachThu = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
-    $danhSachCa = [1, 2, 3, 4];
+        while ($row = $result->fetch_assoc()) {
+            $thu = $row['thu'];
+            $ca = $row['ca'];
+            $phong = $row['phong'];
+            $tenGV = $row['tenGV'];
+            $tenHP = $row['tenHP'];
+            $thoiKhoaBieu[$ca][$thu] = "Môn:$tenHP-Phòng:$phong-GV:$tenGV";
+        }
+    
+        $danhSachThu = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
+        $danhSachCa = [1, 2, 3, 4];
+        }
 ?>
 
 <!DOCTYPE html>
@@ -172,19 +167,30 @@ $phongHocFilter = isset($_GET['phongHoc']) ? $_GET['phongHoc'] : '';
             background-color: #f44336;
             color: white;
         }
+        #locButton {
+            margin-left: 10px;
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #locButton:hover {
+            background-color: #0056b3;
+        }
+        select{
+            font-size: 1.0rem;
+            padding: 0.75rem 1.25rem;
+            height: 2.75rem;
+            width: 300px;
+        }
     </style>
 </head>
+
 <body>
-    <table>
-        <thead>
-            <tr>
-                <th>Ca</th>
-                <?php foreach ($danhSachThu as $thu): ?>
-                    <th><?php echo $thu; ?></th>
-                <?php endforeach; ?>
-            </tr>
-        </thead>
-        <tbody>
+    <table >
+        <tbody id="TableTKB">
             <?php foreach ($danhSachCa as $ca): ?>
                 <tr>
                     <td><?php echo "Ca $ca"; ?></td>
@@ -196,8 +202,9 @@ $phongHocFilter = isset($_GET['phongHoc']) ? $_GET['phongHoc'] : '';
                                 $string = htmlspecialchars($thoiKhoaBieu[$ca][$thu]);
                                 $tt = explode("-",$string);
                                 echo $tt[0]."</div><div>".$tt[1]."</div><div>".$tt[2];
+                            }else {
+                                echo "Trống";
                             }
-                            else echo "Trống";
                             ?>
                             </div>
                         </td>

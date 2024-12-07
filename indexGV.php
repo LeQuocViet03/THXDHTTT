@@ -39,6 +39,27 @@ $username = $_SESSION['username'];
         function dong() {
             document.getElementById("doilich").style.display = "none";
         }
+
+        function loc() {
+            const keyword = document.getElementById("phongHoc").value.trim();
+            if (keyword === "") {
+                alert("Vui lòng chọn phòng để lọc!");
+                return;
+            }
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", `locTKB.php?keyword=${encodeURIComponent(keyword)}`, true);
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    document.getElementById("TableTKB").innerHTML = this.responseText;
+                } else {
+                    console.error("Lỗi tải kết quả lọc:", this.status);
+                }
+            };
+            xhr.onerror = function () {
+                console.error("Lỗi khi gửi yêu cầu lọc.");
+            };
+            xhr.send();
+        }
     </script>
 </head>
 <body>
