@@ -117,13 +117,14 @@
 
 <div class="search-bar">
     <input type="text" id="search" placeholder="Tìm kiếm phòng học...">
-    <button onclick="timKiem()">Tìm Kiếm</button>
+    <button onclick="timKiemPH()">Tìm Kiếm</button>
 </div>
 
 <table>
     <thead>
         <tr>
             <th>Mã Phòng</th>
+            <th>Dãy Phòng</th>
             <th>Số Lượng Máy Tính</th>
             <th>Số Lượng Tivi</th>
             <th>Số Lượng Máy Chiếu</th>
@@ -133,7 +134,7 @@
             <th></th>
         </tr>
     </thead>
-    <tbody id="teacherTable">
+    <tbody id="labTable">
         <?php
             $servername = "localhost";
             $username = "root";
@@ -152,6 +153,7 @@
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>";
                     echo "<td>" . $row["maPhong"] . "</td>";
+                    echo "<td>" . $row["dayPhong"] . "</td>";
                     echo "<td>" . $row["soLuongPC"] . "</td>";
                     echo "<td></td>";
                     echo "<td></td>";
@@ -173,19 +175,5 @@
         ?>
     </tbody>
 </table>
-
-<script>
-    // Xử lý tìm kiếm
-    function timKiem() {
-        const keyword = document.getElementById("search").value.toLowerCase();
-        if (keyword === "") {
-            alert("Vui lòng nhập từ khóa để tìm kiếm!");
-        } else {
-            alert("Tìm kiếm phòng học với từ khóa: " + keyword);
-            // Thực hiện tìm kiếm hoặc gọi API
-        }
-    }
-</script>
-
 </body>
 </html>

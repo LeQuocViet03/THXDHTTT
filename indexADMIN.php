@@ -31,6 +31,66 @@ $username = $_SESSION['username'];
             };
             xhr.send();
         }
+        function timKiemSV() {
+            const keyword = document.getElementById("search").value.trim();
+            if (keyword === "") {
+                alert("Vui lòng nhập từ khóa để tìm kiếm!");
+                return;
+            }
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", `timkiemSV.php?keyword=${encodeURIComponent(keyword)}`, true);
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    document.getElementById("studentTable").innerHTML = this.responseText;
+                } else {
+                    console.error("Lỗi tải kết quả tìm kiếm:", this.status);
+                }
+            };
+            xhr.onerror = function () {
+                console.error("Lỗi khi gửi yêu cầu tìm kiếm.");
+            };
+            xhr.send();
+        }
+        function timKiemGV() {
+            const keyword = document.getElementById("search").value.trim();
+            if (keyword === "") {
+                alert("Vui lòng nhập từ khóa để tìm kiếm!");
+                return;
+            }
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", `timkiemGV.php?keyword=${encodeURIComponent(keyword)}`, true);
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    document.getElementById("teacherTable").innerHTML = this.responseText;
+                } else {
+                    console.error("Lỗi tải kết quả tìm kiếm:", this.status);
+                }
+            };
+            xhr.onerror = function () {
+                console.error("Lỗi khi gửi yêu cầu tìm kiếm.");
+            };
+            xhr.send();
+        }
+        function timKiemPH() {
+            const keyword = document.getElementById("search").value.trim();
+            if (keyword === "") {
+                alert("Vui lòng nhập từ khóa để tìm kiếm!");
+                return;
+            }
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", `timkiemPH.php?keyword=${encodeURIComponent(keyword)}`, true);
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    document.getElementById("labTable").innerHTML = this.responseText;
+                } else {
+                    console.error("Lỗi tải kết quả tìm kiếm:", this.status);
+                }
+            };
+            xhr.onerror = function () {
+                console.error("Lỗi khi gửi yêu cầu tìm kiếm.");
+            };
+            xhr.send();
+        }
     </script>
 </head>
 <body>

@@ -117,7 +117,7 @@
 
 <div class="search-bar">
     <input type="text" id="search" placeholder="Tìm kiếm sinh viên...">
-    <button onclick="timKiem()">Tìm Kiếm</button>
+    <button onclick="timKiemSV()">Tìm Kiếm</button>
 </div>
 
 <table>
@@ -181,17 +181,5 @@
         ?>
     </tbody>
 </table>
-
-<script>
-    function timKiem() {
-        const keyword = document.getElementById("search").value.toLowerCase();
-        if (keyword === "") {
-            alert("Vui lòng nhập từ khóa để tìm kiếm!");
-        } else {
-            alert("Tìm kiếm sinh viên với từ khóa: " + keyword);
-        }
-    }
-</script>
-
 </body>
 </html>

@@ -117,7 +117,7 @@
 
 <div class="search-bar">
     <input type="text" id="search" placeholder="Tìm kiếm giảng viên...">
-    <button onclick="timKiem()">Tìm Kiếm</button>
+    <button onclick="timKiemGV()">Tìm Kiếm</button>
 </div>
 
 <table>
@@ -160,8 +160,8 @@
                     echo "<td></td>";
                     echo "<td></td>";
                     echo "<td>" . $row["khoa"] . "</td>";
-                    echo "<td>" . $row["email"] . "</td>";
                     echo "<td></td>";
+                    echo "<td>" . $row["email"] . "</td>";
                     echo "<td></td>";
                     echo "<td>
                             <button class='edit-btn' onclick='chinhSua(" . $row["maGV"] . ")'>Sửa</button>
@@ -179,17 +179,5 @@
         ?>
     </tbody>
 </table>
-
-<script>
-    function timKiem() {
-        const keyword = document.getElementById("search").value.toLowerCase();
-        if (keyword === "") {
-            alert("Vui lòng nhập từ khóa để tìm kiếm!");
-        } else {
-            alert("Tìm kiếm giảng viên với từ khóa: " + keyword);
-        }
-    }
-</script>
-
 </body>
 </html>
