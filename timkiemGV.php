@@ -9,14 +9,14 @@
         die("Kết nối thất bại: " . $conn->connect_error);
     }
 
-    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    if ($_SERVER["REQUEST_METHOD"] === "GET") {
         $keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : '';
                 
         $sql = "SELECT * FROM giangvien
-                WHERE maGV LIKE ? OR hoTen LIKE ?";
+                WHERE maGV LIKE ? OR hoTen LIKE ? OR khoa LIKE ?";
         $stmt = $conn->prepare($sql);
         $searchParam = "%" . $keyword . "%";
-        $stmt->bind_param("ss", $searchParam, $searchParam);
+        $stmt->bind_param("sss", $searchParam, $searchParam, $searchParam);
         $stmt->execute();
         $result = $stmt->get_result();
                 
