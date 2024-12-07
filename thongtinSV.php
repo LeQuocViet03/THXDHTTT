@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $conn->query($sql);
     if($result->num_rows > 0){
         $row = $result->fetch_assoc();
+        echo '<h1>Thông Tin Sinh Viên</h1>';
         echo '<div class="notification-container">';
         echo '<div class="notification">';
         echo '<div class="content"><strong>Mã sinh viên:</strong></div>';
