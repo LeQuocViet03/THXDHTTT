@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản Lý Phòng Học</title>
+    <title>Quản Lý Học Phần</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -113,28 +113,25 @@
 </head>
 <body>
 
-<h1>Quản Lý Thông Tin Phòng Học</h1>
+<h1>Quản Lý Thông Tin Học Phần</h1>
 
 <div class="search-bar">
     <input type="text" id="search" placeholder="Tìm kiếm phòng học...">
-    <button onclick="timKiemPH()">Tìm Kiếm</button>
+    <button onclick="timKiemHP()">Tìm Kiếm</button>
 </div>
 
 <table>
     <thead>
         <tr>
-            <th>Mã Phòng</th>
-            <th>Dãy Phòng</th>
-            <th>Số Lượng Máy Tính</th>
-            <th>Số Lượng Tivi</th>
-            <th>Số Lượng Máy Chiếu</th>
-            <th>Số Lượng Điều Hòa</th>
-            <th>Số Lượng Quạt</th>
+            <th>Mã Lớp Học Phần</th>
+            <th>Tên Học Phần</th>
+            <th>Khoa</th>
+            <th>Khóa Học</th>
             <th></th>
             <th></th>
         </tr>
     </thead>
-    <tbody id="labTable">
+    <tbody id="HPTable">
         <?php
             $servername = "localhost";
             $username = "root";
@@ -146,29 +143,26 @@
                 die("Kết nối thất bại: " . $conn->connect_error);
             }
 
-            $sql = "SELECT * FROM phonghoc WHERE Rand() LIMIT 5";
+            $sql = "SELECT * FROM hocphan WHERE Rand() LIMIT 5";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>";
-                    echo "<td>" . $row["maPhong"] . "</td>";
-                    echo "<td>" . $row["dayPhong"] . "</td>";
-                    echo "<td>" . $row["soLuongPC"] . "</td>";
-                    echo "<td></td>";
-                    echo "<td></td>";
-                    echo "<td></td>";
-                    echo "<td></td>";
+                    echo "<td>" . $row["maLHP"] . "</td>";
+                    echo "<td>" . $row["tenHP"] . "</td>";
+                    echo "<td>" . $row["khoa"] . "</td>";
+                    echo "<td>" . $row["khoaHoc"] . "</td>";
                     echo "<td class='action-buttons'>
-                            <button class='edit-btn' onclick='chinhSuaPhong(" . $row["maPhong"] . ")'>Sửa</button>
+                            <button class='edit-btn' onclick='chinhSuaHP(" . $row["maLHP"] . ")'>Sửa</button>
                         </td>";
                     echo "<td>
-                            <button class='delete-btn' onclick='xoaPhong(" . $row["maPhong"] . ")'>Xóa</button>
+                            <button class='delete-btn' onclick='xoaHP(" . $row["maLHP"] . ")'>Xóa</button>
                         </td>";
                     echo "</tr>";
                 }
             } else {
-                echo "<tr><td colspan='6'>Không có phòng học nào!</td></tr>";
+                echo "<tr><td colspan='6'>Không có học phần nào!</td></tr>";
             }
 
             $conn->close();

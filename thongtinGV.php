@@ -46,10 +46,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo '<div class="content1">' . $row['khoa'] . '</div>';
         echo '</div>';
         echo '<div class="notification">';
-        echo '<div class="content"><strong>Khóa học:</strong></div>';
-        echo '<div class="content1"></div>';
-        echo '</div>';
-        echo '<div class="notification">';
         echo '<div class="content"><strong>Số điện thoại:</strong></div>';
         echo '<div class="content1"></div>';
         echo '</div>';

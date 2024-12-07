@@ -29,7 +29,8 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
                     giangvien ON phancong.maGV = giangvien.maGV
                 JOIN
                     hocphan ON phancong.maLHP = hocphan.maLHP
-                WHERE phancong.maPhong = ?";
+                WHERE
+                    phancong.maPhong = ?";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $phongHocFilter);

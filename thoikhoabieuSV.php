@@ -12,7 +12,7 @@ if (!$conn) {
     echo "Kết nối thất bại!";
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = $_SESSION['username'];
     $sql = "SELECT 
                 cahoc.ngayHoc AS thu,
@@ -38,10 +38,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 sinhvien
             ON
                 sinhvien.khoa = hocphan.khoa
+            AND 
+                sinhvien.khoaHoc = hocphan.khoaHoc
             AND
-                sinhvien.maSV = $username
-            ORDER BY 
-                cahoc.caHoc, cahoc.ngayHoc";
+                sinhvien.maSV = $username";
 
     $stmt = $conn->prepare($sql);
     $stmt->execute();

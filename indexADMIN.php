@@ -91,6 +91,26 @@ $username = $_SESSION['username'];
             };
             xhr.send();
         }
+        function timKiemHP() {
+            const keyword = document.getElementById("search").value.trim();
+            if (keyword === "") {
+                alert("Vui lòng nhập từ khóa để tìm kiếm!");
+                return;
+            }
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", `timkiemHP.php?keyword=${encodeURIComponent(keyword)}`, true);
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    document.getElementById("HPTable").innerHTML = this.responseText;
+                } else {
+                    console.error("Lỗi tải kết quả tìm kiếm:", this.status);
+                }
+            };
+            xhr.onerror = function () {
+                console.error("Lỗi khi gửi yêu cầu tìm kiếm.");
+            };
+            xhr.send();
+        }
         function loc() {
             const keyword = document.getElementById("phongHoc").value.trim();
             if (keyword === "") {
@@ -133,6 +153,7 @@ $username = $_SESSION['username'];
             <li><a href="#" onclick="loadContent('quanlySV')">Thông tin sinh viên</a></li>
             <li><a href="#" onclick="loadContent('quanlyGV')">Thông tin giảng viên</a></li>
             <li><a href="#" onclick="loadContent('quanlyPH')">Thông tin phòng học</a></li>
+            <li><a href="#" onclick="loadContent('quanlyHP')">Thông tin học phần</a></li>
             <li><a href="#" onclick="loadContent('thoiKhoabieuAD')">Thời khóa biểu</a></li>
             <li><a href="#" onclick="loadContent('thongbaoAD')">Gửi thông báo</a></li>
             <li class="user-info">

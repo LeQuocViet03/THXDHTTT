@@ -40,7 +40,7 @@ $username = $_SESSION['username'];
             document.getElementById("doilich").style.display = "none";
         }
 
-        function loc() {
+        function locmaPhong() {
             const keyword = document.getElementById("phongHoc").value.trim();
             if (keyword === "") {
                 alert("Vui lòng chọn phòng để lọc!");

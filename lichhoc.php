@@ -194,6 +194,7 @@ if (!$conn) {
         </div>
     </div>
 
+    <div>
     <label for="phongHoc">Lọc theo phòng học:</label>
     <select name="phongHoc" id="phongHoc">
         <option value="">Tất cả</option>
@@ -205,7 +206,8 @@ if (!$conn) {
         }
         ?>
     </select>
-    <button id="locButton" onclick="loc()">Lọc</button>
+    <button id="locButton" onclick="locmaPhong()">Lọc</button>
+    </div>
 
     <div class="modal" id="doilich">
         <div class="modal-content">

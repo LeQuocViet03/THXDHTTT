@@ -161,7 +161,7 @@
                     echo "<td></td>";
                     echo "<td></td>";
                     echo "<td>" . $row["khoa"] . "</td>";
-                    echo "<td></td>";
+                    echo "<td>" . $row["khoaHoc"] . "</td>";
                     echo "<td>" . $row["email"] . "</td>";
                     echo "<td></td>";
                     echo "<td></td>";
