@@ -166,10 +166,10 @@
                     echo "<td></td>";
                     echo "<td></td>";
                     echo "<td>
-                            <button class='edit-btn' onclick='chinhSua(" . $row["maSV"] . ")'>Sửa</button>
+                            <button class='edit-btn' onclick='chinhSuaSV(" . $row["maSV"] . ")'>Sửa</button>
                         </td>";
                     echo "<td>
-                            <button class='delete-btn' onclick='xoaSinhVien(" . $row["maSV"] . ")'>Xóa</button>
+                            <button class='delete-btn' onclick='xoaSV(" . $row["maSV"] . ")'>Xóa</button>
                         </td>";
                     echo "</tr>";
                 }

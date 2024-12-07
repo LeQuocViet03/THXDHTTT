@@ -31,10 +31,10 @@
                 echo "<td></td>";
                 echo "<td></td>";
                 echo "<td class='action-buttons'>
-                        <button class='edit-btn' onclick='chinhSuaPhong(" . $row["maPhong"] . ")'>Sửa</button>
+                        <button class='edit-btn' onclick='chinhPH(" . $row["maPhong"] . ")'>Sửa</button>
                     </td>";
                 echo "<td>
-                        <button class='delete-btn' onclick='xoaPhong(" . $row["maPhong"] . ")'>Xóa</button>
+                        <button class='delete-btn' onclick='xoaPH(" . $row["maPhong"] . ")'>Xóa</button>
                     </td>";
                 echo "</tr>";
             }

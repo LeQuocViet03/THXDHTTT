@@ -33,10 +33,10 @@
                 echo "<td>" . $row["email"] . "</td>";
                 echo "<td></td>";
                 echo "<td>
-                        <button class='edit-btn' onclick='chinhSua(" . $row["maGV"] . ")'>Sửa</button>
+                        <button class='edit-btn' onclick='chinhSuaGV(" . $row["maGV"] . ")'>Sửa</button>
                     </td>";
                 echo "<td>
-                        <button class='delete-btn' onclick='xoaGiangVien(" . $row["maGV"] . ")'>Xóa</button>
+                        <button class='delete-btn' onclick='xoaGV(" . $row["maGV"] . ")'>Xóa</button>
                     </td>";
                 echo "</tr>";
             }
