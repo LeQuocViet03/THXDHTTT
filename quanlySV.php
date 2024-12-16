@@ -266,6 +266,62 @@
             background: rgba(0, 0, 0, 0.5);
             z-index: 999;
         }
+
+        #formthemSV {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            z-index: 1000;
+            width: 400px;
+        }
+
+        #formthemSV h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: #4CAF50;
+        }
+
+        #formthemSV label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        #formthemSV input[type="text"] {
+            margin: 10px 0;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        #formthemSV button {
+            margin-top: 10px;
+            width: 48%;
+        }
+
+        #formthemSV button:first-child {
+            margin-right: 4%;
+            background-color: #007BFF;
+        }
+
+        #formthemSV button:first-child:hover {
+            background-color: #0056b3;
+        }
+
+        #formthemSV button:last-child {
+            background-color: #f44336;
+        }
+
+        #formthemSV button:last-child:hover {
+            background-color: #d32f2f;
+        }
     </style>
 </head>
 <body>
@@ -276,7 +332,7 @@
     <input type="text" id="search" placeholder="Tìm kiếm sinh viên...">
     <button onclick="timKiemSV()">Tìm Kiếm</button>
 
-    <button onclick="document.getElementById('formUpload').style.display = 'block'">Thêm sinh viên</button>
+    <button onclick="document.getElementById('formUpload').style.display = 'block'">Thêm bằng file</button>
     <div id="formUpload" style="display: none; border: 1px solid #ccc; padding: 20px; margin-top: 20px; width: 300px;">
         <h3>Thêm sinh viên bằng file</h3>
         <form action="uploadSV.php" method="POST" enctype="multipart/form-data">
@@ -284,6 +340,27 @@
             <input type="file" name="file" id="fileUpload" accept=".csv, .xls, .xlsx" required><br><br>
             <button type="submit">Tải lên</button>
             <button type="button" onclick="document.getElementById('formUpload').style.display = 'none'">Đóng</button>
+        </form>
+    </div>
+
+    <button onclick="document.getElementById('formthemSV').style.display = 'block'">Thêm sinh viên</button>
+    <div id="formthemSV" style="display: none; border: 1px solid #ccc; padding: 20px; margin-top: 20px; width: 300px;">
+        <h3>Thêm Sinh Viên</h3>
+        <form action="themSV.php" method="POST">
+            <label>Mã sinh viên:</label>
+            <input type="text" name="maSV" required>
+            <label>Mật khẩu:</label>
+            <input type="text" name="matKhau" required>
+            <label>Họ tên:</label>
+            <input type="text" name="hoTen" required>
+            <label>Email:</label>
+            <input type="text" name="email" required>
+            <label>Khoa:</label>
+            <input type="text" name="khoa" required>
+            <label>Khóa học:</label>
+            <input type="text" name="khoaHoc" required>
+            <button type="submit">Thêm sinh viên</button>
+            <button type="button" onclick="document.getElementById('formthemSV').style.display = 'none'">Đóng</button>
         </form>
     </div>
 </div>

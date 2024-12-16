@@ -186,7 +186,7 @@
     <input type="text" id="search" placeholder="Tìm kiếm phòng học...">
     <button onclick="timKiemHP()">Tìm Kiếm</button>
 
-    <button onclick="document.getElementById('formUpload').style.display = 'block'">Thêm học phần</button>
+    <button onclick="document.getElementById('formUpload').style.display = 'block'">Thêm bằng file</button>
     <div id="formUpload" style="display: none; border: 1px solid #ccc; padding: 20px; margin-top: 20px; width: 300px;">
         <h3>Thêm học phần bằng file</h3>
         <form action="uploadHP.php" method="POST" enctype="multipart/form-data">
@@ -196,6 +196,8 @@
             <button type="button" onclick="document.getElementById('formUpload').style.display = 'none'">Đóng</button>
         </form>
     </div>
+
+    <button onclick="document.getElementById('formthemHP').style.display = 'block'">Thêm học phần</button>
 </div>
 
 <table>
