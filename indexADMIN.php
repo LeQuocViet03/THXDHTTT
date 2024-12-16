@@ -134,9 +134,102 @@ $username = $_SESSION['username'];
         function doilich() {
             document.getElementById("doilich").style.display = "flex";
         }
-
         function dong() {
             document.getElementById("doilich").style.display = "none";
+        }
+        function xoaSV(maSV) {
+            if (!confirm(`Bạn có chắc chắn muốn xóa sinh viên có mã ${maSV}?`)) {
+                return;
+            }
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "xoaSV.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    const response = JSON.parse(this.responseText);
+                    if (response.status === "success") {
+                        alert(response.message);
+                        document.getElementById(`row-${maSV}`).remove();
+                    } else {
+                        alert("Xóa thất bại: " + response.message);
+                    }
+                } else {
+                    console.error("Lỗi khi gửi yêu cầu xóa:", this.status);
+                }
+            };
+            xhr.onerror = function () {
+                console.error("Lỗi khi gửi yêu cầu xóa.");
+            };
+            xhr.send(`maSV=${encodeURIComponent(maSV)}`);
+        }
+        function moFormChinhSua(maSV) {
+            var rows = document.querySelectorAll('tr');
+
+            for (var i = 0; i < rows.length; i++) {
+                var firstCell = rows[i].cells[0];
+                if (firstCell && firstCell.textContent.trim() === maSV.toString()) {
+                    var parentRow = rows[i];
+                    var tenSV = parentRow.cells[1].textContent;
+                    var khoa = parentRow.cells[5].textContent;
+                    var khoaHoc = parentRow.cells[6].textContent;
+                    var email = parentRow.cells[8].textContent;
+
+                    document.getElementById('editMaSV').value = maSV;
+                    document.getElementById('editTenSV').value = tenSV;
+                    document.getElementById('editKhoa').value = khoa;
+                    document.getElementById('editKhoaHoc').value = khoaHoc;
+                    document.getElementById('editEmail').value = email;
+
+                    document.getElementById("formChinhSua").style.display = "flex";
+                    break;
+                }
+            }
+        }
+        function chinhSuaSV(event) {
+            event.preventDefault();
+
+            var maSV = document.getElementById('editMaSV').value;
+            var tenSV = document.getElementById('editTenSV').value;
+            var khoa = document.getElementById('editKhoa').value;
+            var khoaHoc = document.getElementById('editKhoaHoc').value;
+            var email = document.getElementById('editEmail').value;
+
+            window.location.href = 'chinhSuaSV.php?maSV=' + maSV + 
+                                    '&tenSV=' + encodeURIComponent(tenSV) + 
+                                    '&khoa=' + encodeURIComponent(khoa) + 
+                                    '&khoaHoc=' + encodeURIComponent(khoaHoc) + 
+                                    '&email=' + encodeURIComponent(email);
+        }
+        function dongForm() {
+            document.getElementById("formChinhSua").style.display = "none";
+        }
+
+        function xoaGV(maGV) {
+            if (!confirm(`Bạn có chắc chắn muốn xóa giảng viên có mã ${maGV}?`)) {
+                return;
+            }
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "xoaGV.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    const response = JSON.parse(this.responseText);
+                    if (response.status === "success") {
+                        alert(response.message);
+                        document.getElementById(`row-${maGV}`).remove();
+                    } else {
+                        alert("Xóa thất bại: " + response.message);
+                    }
+                } else {
+                    console.error("Lỗi khi gửi yêu cầu xóa:", this.status);
+                }
+            };
+            xhr.onerror = function () {
+                console.error("Lỗi khi gửi yêu cầu xóa.");
+            };
+            xhr.send(`maGV=${encodeURIComponent(maGV)}`);
         }
     </script>
 </head>

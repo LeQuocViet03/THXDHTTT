@@ -109,6 +109,73 @@
         .delete-btn:hover {
             background-color: #c82333;
         }
+
+        #formUpload {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            z-index: 1000;
+            width: 400px;
+        }
+
+        #formUpload h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: #4CAF50;
+        }
+
+        #formUpload label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        #formUpload input[type="file"] {
+            margin: 10px 0;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        #formUpload button {
+            margin-top: 10px;
+            width: 48%;
+        }
+
+        #formUpload button:first-child {
+            margin-right: 4%;
+            background-color: #007BFF;
+        }
+
+        #formUpload button:first-child:hover {
+            background-color: #0056b3;
+        }
+
+        #formUpload button:last-child {
+            background-color: #f44336;
+        }
+
+        #formUpload button:last-child:hover {
+            background-color: #d32f2f;
+        }
+
+        #formOverlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
     </style>
 </head>
 <body>
@@ -118,6 +185,17 @@
 <div class="search-bar">
     <input type="text" id="search" placeholder="Tìm kiếm phòng học...">
     <button onclick="timKiemPH()">Tìm Kiếm</button>
+
+    <button onclick="document.getElementById('formUpload').style.display = 'block'">Thêm phòng học</button>
+    <div id="formUpload" style="display: none; border: 1px solid #ccc; padding: 20px; margin-top: 20px; width: 300px;">
+        <h3>Thêm phòng học bằng file</h3>
+        <form action="uploadPH.php" method="POST" enctype="multipart/form-data">
+            <label for="fileUpload">Chọn file CSV/Excel:</label><br>
+            <input type="file" name="file" id="fileUpload" accept=".csv, .xls, .xlsx" required><br><br>
+            <button type="submit">Tải lên</button>
+            <button type="button" onclick="document.getElementById('formUpload').style.display = 'none'">Đóng</button>
+        </form>
+    </div>
 </div>
 
 <table>
