@@ -260,9 +260,12 @@ $username = $_SESSION['username'];
             <div class="sidebar-menu">
                 <h3>Thống kê</h3>
                 <ul>
-                    <li><a href="test2.php">Lịch sử sữa chữa</a></li>
-                    <li><a href="#">Lịch sử báo cáo</a></li>
-                    <li><a href="#">Lịch sử thay đổi phòng học</a></li>
+                    <li><a href="#" onclick="loadContent('thongkeSV')">Sinh viên</a></li>
+                    <li><a href="#" onclick="loadContent('thongkeHP')">Học phần</a></li>
+                    <li><a href="#" onclick="loadContent('thongkePC')">Phân công</a></li>
+                    <li><a href="#" onclick="loadContent('thongkeSC')">Lịch sử sửa chữa</a></li>
+                    <li><a href="#" onclick="loadContent('thongkeBC')">Lịch sử báo cáo</a></li>
+                    <li><a href="#" onclick="loadContent('thongkeLSTD')">Lịch sử thay đổi phòng học</a></li>
                 </ul>
             </div>
         </aside>
