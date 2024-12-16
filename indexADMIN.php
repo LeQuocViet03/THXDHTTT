@@ -231,6 +231,60 @@ $username = $_SESSION['username'];
             };
             xhr.send(`maGV=${encodeURIComponent(maGV)}`);
         }
+
+        function xoaHP(maLHP) {
+            if (!confirm(`Bạn có chắc chắn muốn xóa học phần có mã ${maLHP}?`)) {
+                return;
+            }
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "xoaHP.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    const response = JSON.parse(this.responseText);
+                    if (response.status === "success") {
+                        alert(response.message);
+                        document.getElementById(`row-${maLHP}`).remove();
+                    } else {
+                        alert("Xóa thất bại: " + response.message);
+                    }
+                } else {
+                    console.error("Lỗi khi gửi yêu cầu xóa:", this.status);
+                }
+            };
+            xhr.onerror = function () {
+                console.error("Lỗi khi gửi yêu cầu xóa.");
+            };
+            xhr.send(`maLHP=${encodeURIComponent(maLHP)}`);
+        }
+
+        function xoaPH(maPhong) {
+            if (!confirm(`Bạn có chắc chắn muốn xóa phòng học có mã ${maPhong}?`)) {
+                return;
+            }
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "xoaPH.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    const response = JSON.parse(this.responseText);
+                    if (response.status === "success") {
+                        alert(response.message);
+                        document.getElementById(`row-${maPhong}`).remove();
+                    } else {
+                        alert("Xóa thất bại: " + response.message);
+                    }
+                } else {
+                    console.error("Lỗi khi gửi yêu cầu xóa:", this.status);
+                }
+            };
+            xhr.onerror = function () {
+                console.error("Lỗi khi gửi yêu cầu xóa.");
+            };
+            xhr.send(`maPhong=${encodeURIComponent(maPhong)}`);
+        }
     </script>
 </head>
 <body>
