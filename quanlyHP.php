@@ -176,6 +176,62 @@
             background: rgba(0, 0, 0, 0.5);
             z-index: 999;
         }
+
+        #formthemHP {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            z-index: 1000;
+            width: 400px;
+        }
+
+        #formthemHP h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: #4CAF50;
+        }
+
+        #formthemHP label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        #formthemHP input[type="text"] {
+            margin: 10px 0;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        #formthemHP button {
+            margin-top: 10px;
+            width: 65%;
+        }
+
+        #formthemHP button:first-child {
+            margin-right: 4%;
+            background-color: #007BFF;
+        }
+
+        #formthemHP button:first-child:hover {
+            background-color: #0056b3;
+        }
+
+        #formthemHP button:last-child {
+            background-color: #f44336;
+        }
+
+        #formthemHP button:last-child:hover {
+            background-color: #d32f2f;
+        }
     </style>
 </head>
 <body>
@@ -198,6 +254,21 @@
     </div>
 
     <button onclick="document.getElementById('formthemHP').style.display = 'block'">Thêm học phần</button>
+    <div id="formthemHP" style="display: none; border: 1px solid #ccc; padding: 20px; margin-top: 20px; width: 300px;">
+        <h3>Thêm Học Phần</h3>
+        <form action="themHP.php" method="POST">
+            <label>Mã lớp học phần:</label>
+            <input type="text" name="maLHP" required>
+            <label>Tên học phần:</label>
+            <input type="text" name="tenHP" required>
+            <label>Khoa:</label>
+            <input type="text" name="khoa" required>
+            <label>Khóa:</label>
+            <input type="text" name="khoaHoc" required>
+            <button type="submit">Thêm học phần</button>
+            <button type="button" onclick="document.getElementById('formthemHP').style.display = 'none'">Đóng</button>
+        </form>
+    </div>
 </div>
 
 <table>

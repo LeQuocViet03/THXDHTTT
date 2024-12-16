@@ -303,7 +303,7 @@
 
         #formthemSV button {
             margin-top: 10px;
-            width: 48%;
+            width: 65%;
         }
 
         #formthemSV button:first-child {

@@ -176,6 +176,62 @@
             background: rgba(0, 0, 0, 0.5);
             z-index: 999;
         }
+
+        #formthemPH {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            z-index: 1000;
+            width: 400px;
+        }
+
+        #formthemPH h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: #4CAF50;
+        }
+
+        #formthemPH label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        #formthemPH input[type="text"] {
+            margin: 10px 0;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        #formthemPH button {
+            margin-top: 10px;
+            width: 65%;
+        }
+
+        #formthemPH button:first-child {
+            margin-right: 4%;
+            background-color: #007BFF;
+        }
+
+        #formthemPH button:first-child:hover {
+            background-color: #0056b3;
+        }
+
+        #formthemPH button:last-child {
+            background-color: #f44336;
+        }
+
+        #formthemPH button:last-child:hover {
+            background-color: #d32f2f;
+        }
     </style>
 </head>
 <body>
@@ -198,6 +254,19 @@
     </div>
 
     <button onclick="document.getElementById('formthemPH').style.display = 'block'">Thêm phòng học</button>
+    <div id="formthemPH" style="display: none; border: 1px solid #ccc; padding: 20px; margin-top: 20px; width: 300px;">
+        <h3>Thêm Phòng Học</h3>
+        <form action="themPH.php" method="POST">
+            <label>Mã phòng:</label>
+            <input type="text" name="maPhong" required>
+            <label>Dãy phòng:</label>
+            <input type="text" name="dayPhong" required>
+            <label>Số lượng PC</label>
+            <input type="text" name="soLuongPC" required>
+            <button type="submit">Thêm phòng học</button>
+            <button type="button" onclick="document.getElementById('formthemPH').style.display = 'none'">Đóng</button>
+        </form>
+    </div>
 </div>
 
 <table>
