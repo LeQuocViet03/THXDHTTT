@@ -65,9 +65,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {
     //     }
     //         echo "Thêm sinh viên từ file Excel thành công!";
     // } else {
-        echo "Chỉ hỗ trợ file CSV hoặc Excel!";
-    }
-// } 
+    //     echo "Chỉ hỗ trợ file CSV hoặc Excel!";
+    // }
+} 
 else {
     echo "Vui lòng chọn file để tải lên!";
 }
