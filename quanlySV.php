@@ -368,28 +368,28 @@
 <div class="modal" id="formChinhSua">
     <div class="modal-content">
         <h2>Chỉnh sửa thông tin sinh viên</h2>
-        <form id="formEdit">
+        <form id="formEdit" method="POST" action="chinhSuaSV.php">
             <div class="form-group">
-                <label>Mã SV:</label>
-                <input type="text" id="editMaSV" readonly>
+                <label>Mã sinh viên:</label>
+                <input type="text" id="editMaSV" name="maSV" readonly>
             </div>
             <div class="form-group">
                 <label for="editTenSV">Tên sinh viên:</label>
-                <input type="text" id="editTenSV" required>
-            </div>
-                <div class="form-group">
-                <label for="editKhoa">Khoa:</label>
-                <input type="text" id="editKhoa" required>
-            </div>
-            <div class="form-group">
-                <label for="editKhoaHoc">Khóa học:</label>
-                <input type="text" id="editKhoaHoc" required>
+                <input type="text" id="editTenSV" name="hoTen" required>
             </div>
             <div class="form-group">
                 <label for="editEmail">Email:</label>
-                <input type="text" id="editEmail" required>
+                <input type="text" id="editEmail" name="email" required>
             </div>
-            <button id = "edit-btn" type="button" onclick="chinhSuaSV()">Lưu thay đổi</button>
+            <div class="form-group">
+                <label for="editKhoa">Khoa:</label>
+                <input type="text" id="editKhoa" name="khoa" required>
+            </div>
+            <div class="form-group">
+                <label for="editKhoaHoc">Khóa học:</label>
+                <input type="text" id="editKhoaHoc" name="khoaHoc" required>
+            </div>
+            <button id = "edit-btn" type="submit" onclick="chinhSuaSV()">Lưu thay đổi</button>
             <button id = "dong-btn" type="button" onclick="dongForm()">Đóng</button>
         </form>
     </div>
@@ -441,7 +441,7 @@
                     echo "<td>" . $row["email"] . "</td>";
                     echo "<td></td>";
                     echo "<td>
-                            <button class='edit-btn' onclick='moFormChinhSua(" . $row['maSV'] . ")'>Sửa</button>
+                            <button class='edit-btn' onclick='moFormChinhSuaSV(" . $row['maSV'] . ")'>Sửa</button>
                         </td>";
                     echo "<td>
                             <button class='delete-btn' onclick='xoaSV(" . $row["maSV"] . ")'>Xóa</button>

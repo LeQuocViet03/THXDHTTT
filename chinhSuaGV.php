@@ -11,28 +11,27 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $maSV = $_POST['maSV'];
+    $maGV = $_POST['maGV'];
     $hoTen = $_POST['hoTen'];
     $email = $_POST['email'];
     $khoa = $_POST['khoa'];
-    $khoaHoc = $_POST['khoaHoc'];
 
-$sql = "UPDATE sinhvien
-        SET hoTen = ?, email = ?, khoa = ?, khoaHoc = ?
-        WHERE maSV = ?";
+$sql = "UPDATE giangvien
+        SET hoTen = ?, email = ?, khoa = ?
+        WHERE maGV = ?";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("sssss", $hoTen, $email, $khoa, $khoaHoc, $maSV);
+$stmt->bind_param("ssss", $hoTen, $email, $khoa, $maGV);
 
 if ($stmt->execute()) {
     if ($stmt->affected_rows > 0) {
         echo "<script>
-            alert('Cập nhật thông tin sinh viên thành công!');
+            alert('Cập nhật thông tin giảng viên thành công!');
             window.history.back();
         </script>";
     } else {
         echo "<script>
-            alert('Cập nhật thông tin sinh viên không thành công!');
+            alert('Cập nhật thông tin giảng viên không thành công!');
             window.history.back();
         </script>";
     }

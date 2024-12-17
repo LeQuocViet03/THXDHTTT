@@ -163,7 +163,7 @@ $username = $_SESSION['username'];
             };
             xhr.send(`maSV=${encodeURIComponent(maSV)}`);
         }
-        function moFormChinhSua(maSV) {
+        function moFormChinhSuaSV(maSV) {
             var rows = document.querySelectorAll('tr');
 
             for (var i = 0; i < rows.length; i++) {
@@ -185,24 +185,6 @@ $username = $_SESSION['username'];
                     break;
                 }
             }
-        }
-        function chinhSuaSV(event) {
-            event.preventDefault();
-
-            var maSV = document.getElementById('editMaSV').value;
-            var tenSV = document.getElementById('editTenSV').value;
-            var khoa = document.getElementById('editKhoa').value;
-            var khoaHoc = document.getElementById('editKhoaHoc').value;
-            var email = document.getElementById('editEmail').value;
-
-            window.location.href = 'chinhSuaSV.php?maSV=' + maSV + 
-                                    '&tenSV=' + encodeURIComponent(tenSV) + 
-                                    '&khoa=' + encodeURIComponent(khoa) + 
-                                    '&khoaHoc=' + encodeURIComponent(khoaHoc) + 
-                                    '&email=' + encodeURIComponent(email);
-        }
-        function dongForm() {
-            document.getElementById("formChinhSua").style.display = "none";
         }
 
         function xoaGV(maGV) {
@@ -230,6 +212,27 @@ $username = $_SESSION['username'];
                 console.error("Lỗi khi gửi yêu cầu xóa.");
             };
             xhr.send(`maGV=${encodeURIComponent(maGV)}`);
+        }
+        function moFormChinhSuaGV(maGV) {
+            var rows = document.querySelectorAll('tr');
+
+            for (var i = 0; i < rows.length; i++) {
+                var firstCell = rows[i].cells[0];
+                if (firstCell && firstCell.textContent.trim() === maGV.toString()) {
+                    var parentRow = rows[i];
+                    var tenGV = parentRow.cells[1].textContent;
+                    var khoa = parentRow.cells[5].textContent;
+                    var email = parentRow.cells[7].textContent;
+
+                    document.getElementById('editMaGV').value = maGV;
+                    document.getElementById('editTenGV').value = tenGV;
+                    document.getElementById('editKhoa').value = khoa;
+                    document.getElementById('editEmail').value = email;
+
+                    document.getElementById("formChinhSua").style.display = "flex";
+                    break;
+                }
+            }
         }
 
         function xoaHP(maLHP) {
@@ -284,6 +287,10 @@ $username = $_SESSION['username'];
                 console.error("Lỗi khi gửi yêu cầu xóa.");
             };
             xhr.send(`maPhong=${encodeURIComponent(maPhong)}`);
+        }
+
+        function dongForm() {
+            document.getElementById("formChinhSua").style.display = "none";
         }
     </script>
 </head>
